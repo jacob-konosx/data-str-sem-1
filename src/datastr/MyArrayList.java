@@ -118,4 +118,31 @@ public class MyArrayList {
 		}
 		return neighbours;
 	}
+	public void makeEmpty() {
+		size = LIST_DEFAULT_SIZE;
+		list = new int[size];
+		counter = 0;
+		System.gc();
+	}
+	public void print()throws Exception {
+		if(isEmpty()) throw new Exception("Array is empty");
+		for(int i = 0; i < counter; i++) {
+			System.out.print(list[i] + " ");
+		}
+		System.out.println();
+	}
+	 public void sort() throws Exception{
+		if(isEmpty()) throw new Exception("Array is empty");
+        int N = size;
+        
+        for (int i = 0; i < N - 1; i++) {
+            for (int j = 0; j < N-i-1; j++) {
+                if (list[j+1] < list[j]){
+                    int temp = list[j];
+                    list[j] = list[j+1];
+                    list[j+1] = temp;
+                }
+            }
+        }
+	 }
 }
