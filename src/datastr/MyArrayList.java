@@ -1,5 +1,8 @@
 package datastr;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MyArrayList {
 	private int[] list;
 	private final int LIST_DEFAULT_SIZE = 10;
@@ -44,5 +47,75 @@ public class MyArrayList {
 		list = newList;
 		System.gc();
 		size = newSize;
+	}
+	public void add(int newElement) {
+		if(isFull()) resizeArr();
+		list[counter] = newElement;
+		counter++;
+	}
+	
+	public void addAt(int index, int newElement)throws Exception {
+		if(isFull()) resizeArr();
+		if(index < 0 || index >= size) throw new Exception("Invalid index");
+		if(index == counter) {
+			add(newElement);
+			return;
+		}
+		
+		for(int i = counter; i > index; i--) {
+			list[i] = list[i-1];		
+		}
+		list[index] = newElement;
+		counter++;
+	}
+	public void deleteAt(int index) throws Exception{
+		if(index < 0 || index >= counter) throw new Exception("Invalid index");
+		if(isEmpty()) throw new Exception("Array is empty");
+		
+		for(int i = index; i < counter; i++) {
+			list[i] = list[i+1]; 
+		}
+		counter--;
+	}
+	
+	public int getAt(int index) throws Exception{
+		if(index < 0 || index >= counter) throw new Exception("Invalid index");
+		if(isEmpty()) throw new Exception("Array is empty");
+		
+		return list[index];
+	}
+	public int getElementAtIndex(int index) throws Exception{
+		if(index < 0 || index >= counter) throw new Exception("Invalid index");
+		if(isEmpty()) throw new Exception("Array is empty");
+		
+		return list[index];
+	}
+	public ArrayList getElementIndexes(int element) throws Exception{
+		if(isEmpty()) throw new Exception("Array is empty");
+		ArrayList indexes = new ArrayList();
+
+		for(int i = 0; i < counter; i++) {
+			if(list[i] == element) {
+				indexes.add(i);
+			}
+		}
+		if(indexes.size() == 0) throw new Exception("Element is not found in the array!");
+		return indexes;
+	}
+	public int[] getNeighbours(int element) throws Exception {
+		ArrayList indexes = getElementIndexes(element);
+		int neighboursSize = indexes.size();
+		
+		if((Integer)indexes.get(indexes.size()-1) == counter -1) {
+			neighboursSize--;
+		}
+		
+		int[] neighbours = new int[neighboursSize];
+		for(int i = 0; i < neighboursSize; i++) {
+			int indexFromSearchTemp = (int)indexes.get(i);
+			int indexNeighbourTemp = indexFromSearchTemp+1;
+			neighbours[i] = list[indexNeighbourTemp];
+		}
+		return neighbours;
 	}
 }
