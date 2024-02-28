@@ -29,7 +29,20 @@ public class MyArrayList {
 	}
 	
 	//howManyElements
-		public int howManyElements() {
-			return counter;
+	public int howManyElements() {
+		return counter;
+	}
+		
+	public void resizeArr() {
+		int newSize = (size < 100) ? size*2: (int)(size * 1.5);
+		int[] newList = new int[newSize];
+		
+		for(int i = 0; i < counter; i++) {
+			newList[i] = list[i];
 		}
+		
+		list = newList;
+		System.gc();
+		size = newSize;
+	}
 }
