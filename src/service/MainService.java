@@ -17,7 +17,7 @@ public class MainService {
 			myList.print();
 
 		} catch (Exception e) {
-			// TODO: handle exception
+			e.printStackTrace();
 		}
 	}
 
