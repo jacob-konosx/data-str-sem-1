@@ -132,7 +132,7 @@ public class MyArrayList<Ttype> {
 	
 	public void print()throws Exception {
 		if(isEmpty()) throw new Exception("Array is empty");
-		//System.out.println(counter);
+		// System.out.println(counter);
 		for(int i = 0; i < counter; i++) {
 			System.out.println(list[i] + " ");
 		}
